@@ -1,0 +1,373 @@
+---
+title: "SporGerm_db"
+output: html_document
+date: "2025-06-17"
+---
+
+```{r}
+library(here)
+library(tidyverse)
+library(UniprotR)
+library(data.table)
+library(httr)
+library(readr)
+
+
+###print/check working dir of project
+here::here()
+
+### call uniprot API functions to submit jobs and print results
+
+source(here("functions/UniprotFunc.R"))
+
+```
+
+
+### Clean SubtiWiki Gene Data
+```{r}
+### All genes and functional categories on SubtiWiki
+# https://subtiwiki.uni-goettingen.de/v5/data-export/genes
+
+##functional categories
+subti.cat <- read.csv(here("data/reference_data/2025-06-17_16-51-14_subti_wiki_export_categories.csv"))
+
+## pull all categories associated with with sporulation/germination (4.2.*) 
+### 3.3.7.3 is also associated with sporulation/germination, but it is redundant so we can leave it out
+subti.cat <- subset(subti.cat, grepl("^4\\.2\\b", dot_notation))
+colnames(subti.cat) <- c("cat_id", "dot_notation", "cat_name")
+
+### label each category as broadly related to sporulation or germination
+subti.cat$broad_func <- "sporulation"
+subti.cat$broad_func <- ifelse(subti.cat$cat_id %in% c(136, 137, 408, 407), "germination", subti.cat$broad_func)
+
+
+## load all subtiwiki genes
+subti.gene <- read.csv(here("data/reference_data/2025-06-17_16-51-38_subti_wiki_export_genes.csv"))
+subti.gene <- subti.gene[,c(3,16,23)]
+colnames(subti.gene) <- c("gene_name", "gene_locus", "gene_cat")
+
+
+library(stringr)
+
+### clean subtiwiki formating 
+
+### remove everything but the subtiwki categories, which are inside the paranthesis 
+extr<- str_extract_all(subti.gene$gene_cat, "\\(\\d+\\)")
+
+#get rid of paranthesis and put the clean string back into subti.gene as a new column (subticats), that lists all gene categories assigned to each gene
+subti.gene$SubtiCats <- sapply(extr, function(x) paste(str_remove_all(x, "[()]"), collapse = ", "))
+
+## create a row for each cattegory
+subti.gene$cat_id <- subti.gene$SubtiCats
+subti.gene <- separate_rows(subti.gene, cat_id, sep = ",\\s*")
+
+
+### merge all sporulation/germ cats with SubtiWiki genes and keep only hits
+
+subti <- merge(subti.cat, subti.gene, by.x="cat_id", by.y="cat_id", all.x=FALSE, all.y=FALSE)
+
+
+## note that some genes have multiple spor/germ categories, so there are duplicate "genes" in here.
+## remove "duplicates" by dropping the specific categories and grouping by either spor / germ
+subti.clean <- subti[,c(4,5,6,8)]
+
+subti.clean <- unique(subti.clean)
+
+## any remaining duplicate genes are genes that are associated with both germ and spor
+both_germspor <- as.data.frame(subti.clean$gene_locus[duplicated(subti.clean$gene_locus)])
+colnames(both_germspor) <- "gene_locus"
+both_germspor$subti_func <- "sporulation_germination"
+
+### merge in the sporulation_germination category
+subti.clean <- merge(subti.clean, both_germspor, by="gene_locus", all.x=TRUE, all.y=FALSE)
+subti.clean$subti_func[is.na(subti.clean$subti_func)] <- "NA"
+subti.clean$subti_func <- ifelse(subti.clean$subti_func=="NA", subti.clean$broad_func, subti.clean$subti_func)
+
+### clean subti 
+subti.clean <- subti.clean[,-c(2)]
+subti.clean <- unique(subti.clean)
+
+```
+
+
+### prepare subtiwiki genes for submission to Uniprot
+```{r}
+
+## Create alternate versions of gene loci without underscores so both versions can be searched. Only  one version should hit to a result. 
+
+subti.clean$gene_locus2 <- gsub("_", "", subti.clean$gene_locus)
+
+## Create a single list of loci name 
+
+df1 <- as.data.frame(subti.clean$gene_locus)
+df2 <- as.data.frame(subti.clean$gene_locus2)
+colnames(df1) <- "gene_locus"
+colnames(df2) <- "gene_locus"
+
+bsub.loci2 <- rbind(df1, df2)
+
+bsub.loci <- unique(bsub.loci2[,c(1)])
+
+
+#### write list of B. sub gene names associated with sporulation/germination. 
+
+write.table(bsub.loci, here("data/output_data/bsub_loci_sporgerm.txt"), row.names=FALSE, col.names=FALSE, quote=FALSE)
+
+```
+
+### map bsub.loci to Uniprot
+
+```{r}
+## Using above list as input, map these gene loci to their UniProt IDs using https://www.uniprot.org/id-mapping and their supplied API code (functions in R source). 
+## This can also be done on their website with the settings: Gene_Name → UniProtKB
+
+
+### load IDs
+files = list(
+  ids = paste(bsub.loci, collapse = ","),
+  from = "Gene_Name",
+  to = "UniProtKB"
+)
+
+
+
+r <- POST(url = "https://rest.uniprot.org/idmapping/run", body = files, encode = "multipart", accept_json())
+submission <- content(r, as = "parsed")
+
+### url_fields: list columns/metadata you want from uniprot
+## see: https://www.uniprot.org/help/return_fields 
+## you will be re-requesting this data with additional metadata later in the code, so no need to add additional url_fields requirements in this code chunk
+
+url_fields <- c("accession", "reviewed", "protein_name","gene_names")
+url_fields <- paste(url_fields, collapse = ",")
+
+
+if (isJobReady(submission[["jobId"]])) {
+  url <- paste("https://rest.uniprot.org/idmapping/details/", submission[["jobId"]], sep = "")
+  r <- GET(url = url, accept_json())
+  details <- content(r, as = "parsed")
+  url <- getResultsURL(details[["redirectURL"]])
+  # Using TSV format see: https://www.uniprot.org/help/api_queries#what-formats-are-available
+  url <- paste(url, "?fields=accession,gene_names,keyword&format=tsv", sep = "")
+  print(url)
+  r <- GET(url = url, accept_json())
+  bsub.prot = read.table(text = content(r), sep = "\t", header=TRUE)
+ 
+}
+
+
+### high amount of discrepancy between number of rows in  bsub.loci and bsub.prot is expected, since bsub.loci includes alternate versions of the same gene name because some gene names on Uniprot are formmated with underscores while others are not. So the easiest to make sure all are captured by the search is to include both potential versions in bsub.loci (BSUB_XXXX and BSUBXXXX) -- but only one of these will actually hit for each protein in bsub.prot.
+```
+
+
+```{r}
+
+## return Subti gene loci to original Subti format to remerge with Subti metadata
+bsub.prot$From <- ifelse(!grepl("_", bsub.prot$From), gsub("BSU","BSU_",bsub.prot$From), bsub.prot$From)
+
+bsub <- merge(subti.clean, bsub.prot, by.y="From", by.x="gene_locus", all=TRUE )
+
+subtiWiki.Uni.key <- bsub[,c(6,1:4)]
+
+##pull Uniprot entry ID for use later
+bsub.ID <- as.data.frame(bsub$Entry)
+
+```
+
+
+### Find all Sporulation Hits in Uniprot
+```{r}
+
+
+# Define URL of query, this only returns IDs and entry names of swissprot reviewed eubacteria domain, tagged with sporulation: KW-0749 or germination: KW-0309 keyword
+
+## URL of search query in Uniprot: https://www.uniprot.org/uniprotkb?query=%28taxonomy_id%3A2%29+AND+%28reviewed%3Atrue%29+AND+%28keyword%3AKW-0749%29+OR+%28taxonomy_id%3A2%29+AND+%28reviewed%3Atrue%29+AND+%28keyword%3AKW-0309%29
+
+
+## modified url of search query to only return gene_name and accession number as metadata
+
+base_url <- "https://rest.uniprot.org/uniprotkb/stream?compressed=true&fields=accession%2Cid%2Cgene_names&format=tsv&query=%28taxonomy_id%3A2%29+AND+%28reviewed%3Atrue%29+AND+%28keyword%3AKW-0749%29+OR+%28taxonomy_id%3A2%29+AND+%28reviewed%3Atrue%29+AND+%28keyword%3AKW-0309%29"
+
+
+# send GET request to Uniprot
+response <- GET(url = base_url, accept("application/gzip"))
+
+# check response for completion, then turn response into data
+if (status_code(response) == 200) {
+  # Read compressed response as raw binary
+  raw_data <- content(response, "raw")
+  
+  # Use gzcon() to create a readable text connection
+  con <- gzcon(rawConnection(raw_data))
+  
+  # Read TSV data
+  KWSpor <- read_tsv(con, col_types = cols(.default = "c"))  
+  close(con)  # Close connection
+  
+  # Print first few rows
+  print(head(KWSpor))
+  
+  # Save as a TSV file
+  write_tsv(KWSpor, here("data/output_data/id_uniprot_results.tsv"))
+  
+} else {
+  print(paste("Error:", status_code(response)))
+}
+
+
+
+keySpor.ID <- as.data.frame(KWSpor$Entry)
+```
+
+#### at some point, will need to rewrite code / add a second .Rmd to add in any manual additions from Daniel 2023, other hand-curated proteins, or any subtiWiki proteins which didn't hit using the BSU_locus method.
+
+```{r}
+
+
+### create vector of all Uniprot and BsubIDs
+
+
+colnames(keySpor.ID) <-"Entry"
+colnames(bsub.ID) <-"Entry"
+
+Uni.ID <- rbind(keySpor.ID, bsub.ID)
+
+
+Uni.ID <- unique(Uni.ID) ###1290 unique IDs flagged as sporulation either by Subtiwiki or Uniprot Keyword
+Uni.ID <- subset(Uni.ID, Uni.ID!=is.na(Uni.ID))
+vec.ID <- Uni.ID$Entry
+
+
+```
+
+
+
+### GET ALL IDS in one file with metadata
+
+```{r}
+### load IDs
+files = list(
+  ids = paste(vec.ID, collapse = ","),
+  from = "UniProtKB_AC-ID",
+  to = "UniProtKB")
+
+
+r <- POST(url = "https://rest.uniprot.org/idmapping/run", body = files, encode = "multipart", accept_json())
+submission <- content(r, as = "parsed")
+
+### url_fields: list columns/metadata you want from uniprot 
+## see: https://www.uniprot.org/help/return_fields 
+## xref_ko is no longer a valid entry on uniprot
+
+url_fields <- c("accession", "reviewed", "protein_name","gene_names", "annotation_score","keyword","lit_pubmed_id", "gene_orf", "xref_kegg", "xref_eggnog", "xref_refseq", "xref_cazy", "xref_brenda", "xref_orthodb", "xref_pfam","xref_interpro", "xref_biocyc", "xref_unipathway")
+url_fields <- paste(url_fields, collapse = ",")
+
+
+if (isJobReady(submission[["jobId"]])) {
+  url <- paste("https://rest.uniprot.org/idmapping/details/", submission[["jobId"]], sep = "")
+  r <- GET(url = url, accept_json())
+  details <- content(r, as = "parsed")
+  url <- getResultsURL(details[["redirectURL"]])
+  # request metadata fields + tsv format by adding it to end of job url
+  url <- paste(url, "?fields=", url_fields, "&format=tsv", sep = "")
+  print(url)
+  r <- GET(url = url, accept_json())
+  raw_text <- content(r, as = "text")
+  Master.List <- fread(input = raw_text, sep = "\t", header = TRUE, quote = "")
+  Master.List <- as.data.frame(Master.List)
+}
+
+
+
+### add in the SubtiWiki metadata fro relevant proteins
+Master.Metadata <- merge(Master.List, subtiWiki.Uni.key, by="Entry", all.x=TRUE, all.y=FALSE)
+
+
+
+```
+
+
+```{r}
+
+### search UniProt Keywords for sporulation, germination, or both and assign respective category to UniKey column.
+
+Master.Metadata$UniKey <- "NA"
+
+Master.Metadata$UniKey <- ifelse(grepl("sporulation", Master.Metadata$Keywords, ignore.case = TRUE), "sporulation", Master.Metadata$UniKey)
+
+
+Master.Metadata$UniKey <- ifelse(grepl("germination", Master.Metadata$Keywords, ignore.case = TRUE), "germination", Master.Metadata$UniKey)
+
+Master.Metadata$UniKey <- ifelse(grepl("germination", Master.Metadata$Keywords, ignore.case = TRUE) & grepl("sporulation", Master.Metadata$Keywords, ignore.case = TRUE), "sporulation_germination", Master.Metadata$UniKey)
+
+
+
+write.csv(Master.Metadata, here("data/output_data/UniprotSporGerm_Master.csv"))
+
+```
+
+
+### At this point, Master.List is a complete list of all Uniprot IDs flagged by Uniprot or SubtiWiki
+### Hand curated  Schwartz et al. 2023 as relating to sporulation still needs to be added in.
+
+
+### download protein (amino acid) fasta files
+
+```{r}
+files = list(
+  ids = paste(vec.ID, collapse = ","),
+  from = "UniProtKB_AC-ID",
+  to = "UniProtKB")
+
+
+r <- POST(url = "https://rest.uniprot.org/idmapping/run", body = files, encode = "multipart", accept_json())
+submission <- content(r, as = "parsed")
+
+
+if (isJobReady(submission[["jobId"]])) {
+  url <- paste("https://rest.uniprot.org/idmapping/details/", submission[["jobId"]], sep = "")
+  r <- GET(url = url, accept_json())
+  details <- content(r, as = "parsed")
+  url <- getResultsURL(details[["redirectURL"]])
+  url <- paste(url, "?compressed=false&format=fasta", sep = "")  # Ensure compression is OFF
+
+  print(url)
+  
+  r <- GET(url = url, accept_json())
+  raw_text <- content(r, as = "text")  # Get raw FASTA text
+
+  fasta.out <- strsplit(raw_text, "\n")[[1]]  # Split into lines
+  
+  ### Clean headers
+  fasta.out <- gsub(">sp\\|", ">", fasta.out)
+  fasta.out <- gsub("\\|", " ", fasta.out)
+
+  ### Reformat FASTA: one header, one sequence per entry
+  formatted_fasta <- c()
+  current_seq <- ""
+  
+  for (line in fasta.out) {
+    if (startsWith(line, ">")) {
+      # Store previous sequence if it exists
+      if (current_seq != "") {
+        formatted_fasta <- c(formatted_fasta, current_seq)
+      }
+      formatted_fasta <- c(formatted_fasta, line)  # Add new header
+      current_seq <- ""  # Reset sequence
+    } else {
+      current_seq <- paste0(current_seq, line)  # Concatenate sequence
+    }
+  }
+  
+  # Add last sequence
+  if (current_seq != "") {
+    formatted_fasta <- c(formatted_fasta, current_seq)
+  }
+
+  ### Write to file
+  writeLines(formatted_fasta, here("data/output_data/uniprot_sporgerm.faa"))
+}
+
+```
+
+

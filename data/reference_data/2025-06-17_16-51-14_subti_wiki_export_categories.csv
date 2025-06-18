@@ -1,0 +1,469 @@
+id,dot_notation,name
+1,1,Cellular processes
+2,1.1,Cell envelope and cell division
+3,1.1.1,Cell wall synthesis
+4,1.1.2,Cell shape
+5,1.1.3,Cell wall degradation/ turnover
+6,1.1.4,Capsule biosynthesis and degradation
+7,1.1.5,Cell wall/ other
+8,1.1.6,Cell wall/ other/ based on similarity
+9,1.1.7,Membrane dynamics
+10,1.1.1.1,Biosynthesis of peptidoglycan
+11,1.1.1.2,Autolytic activity required for peptidoglycan synthesis (cell elongation)
+12,1.1.1.3,Biosynthesis of lipoteichoic acid
+13,1.1.1.4,Biosynthesis of teichoic acid
+14,1.1.1.5,Biosynthesis of teichuronic acid
+15,1.1.1.6,Export of anionic polymers and attachment to peptidoglycan
+16,1.1.1.7,Penicillin-binding proteins
+17,1.1.1.8,Biosynthesis of the carrier lipid undecaprenylphosphate
+18,1.1.3.1,Autolysis
+19,1.1.3.2,Autolysis/ based on similarity
+20,1.1.3.3,Utilization of cell wall components
+21,1.1.3.4,Endopeptidases
+22,1.1.3.5,N-acetyl-β-D-glucosaminidases
+23,1.1.3.6,Cell wall degradation/ turnover/ Additional genes
+24,2,Metabolism
+25,3,Information processing
+26,4,Lifestyles
+27,5,Prophages and mobile genetic elements
+28,6,Groups of genes
+29,1.2,Transporters
+30,1.3,Homeostasis
+31,2.1,Electron transport and ATP synthesis
+32,2.2,Carbon metabolism
+33,2.3,Amino acid/ nitrogen metabolism
+34,2.4,Lipid metabolism
+35,2.5,Nucleotide metabolism
+36,2.6,Additional metabolic pathways
+37,2.7,Detoxification reactions
+38,3.1,Genetics
+39,3.2,RNA synthesis and degradation
+40,3.3,"Protein synthesis, modification and degradation"
+41,3.4,Regulation of gene expression
+42,3.5,Targets of second messengers
+43,4.1,Exponential and early post-exponential lifestyles
+44,4.2,Sporulation
+45,4.3,Coping with stress
+46,4.4,Lifestyles/ miscellaneous
+47,5.1,Prophages
+48,5.2,Mobile genetic elements
+49,6.1,Essential genes
+50,6.1,Pseudogenes
+51,6.11,Efp-dependent proteins
+52,6.12,Secreted proteins
+53,6.13,Quasi-essential genes
+54,6.14,Strongly expressed understudied proteins
+55,6.2,Membrane proteins
+56,6.3,GTP-binding proteins
+57,1.1.8,Cell division
+58,1.1.9,Cell division/ based on similarity
+59,1.2.1,ABC transporters
+60,1.2.2,Phosphotransferase system
+61,1.2.3,ECF transporter
+62,1.2.4,Transporters/ other
+63,1.3.1,"Metal ion homeostasis (K, Na, Ca, Mg)"
+64,1.3.2,"Trace metal homeostasis (Cu, Zn, Ni, Mn, Mo)"
+65,1.3.3,Acquisition of iron
+66,1.3.4,Acquisition of iron/ based on similarity
+67,1.3.5,PH homeostasis
+68,2.1.1,Regulators of electron transport
+69,2.1.2,Respiration
+70,2.1.3,Electron transport/ other
+71,2.1.4,Electron transport/ other/ based on similarity
+72,2.1.5,ATP synthesis
+73,2.2.1,Carbon core metabolism
+74,2.2.2,Utilization of specific carbon sources
+75,2.2.3,Acquisition of bicarbonate
+76,2.3.1,Biosynthesis/ acquisition of amino acids
+77,2.3.2,Utilization of amino acids
+78,2.3.3,Utilization of nitrogen sources other than amino acids
+79,2.3.4,Putative amino acid transporter
+80,2.4.1,Utilization of lipids
+81,2.4.2,Biosynthesis of lipids
+82,2.4.3,Lipid metabolism/ other
+83,2.5.1,Utilization of nucleotides
+84,2.5.2,Biosynthesis/ acquisition of nucleotides
+85,2.5.3,Metabolism of signalling nucleotides
+86,2.5.4,Nucleotide metabolism/ other
+87,2.6.1,Biosynthesis of cell wall components
+88,2.6.2,Biosynthesis of cofactors
+89,2.6.3,Phosphate metabolism
+90,2.6.4,Sulfur metabolism
+91,2.6.5,Iron metabolism
+92,2.6.6,Miscellaneous metabolic pathways
+93,3.1.1,DNA replication
+94,3.1.2,DNA replication/ based on similarity
+95,3.1.3,DNA condensation/ segregation
+96,3.1.4,DNA restriction/ modification
+97,3.1.5,DNA repair/ recombination
+98,3.1.6,DNA repair/ recombination/ based on similarity
+99,3.1.7,Genetic competence
+100,3.1.8,Genetics/ other/ based on similarity
+101,3.1.9,Newly identified competence genes
+102,3.2.1,Transcription
+103,3.2.2,RNA chaperones
+104,3.2.3,DEAD-box RNA helicases
+105,3.2.4,RNases
+106,3.2.5,RNase/ based on similarity
+107,3.3.1,Translation
+108,3.3.2,Chaperones/ protein folding
+109,3.3.3,Chaperone/ protein folding/ based on similarity
+110,3.3.4,Protein modification
+111,3.3.5,Protein secretion
+112,3.3.6,Protein secretion/ based on similarity
+113,3.3.7,Proteolysis
+114,3.4.1,Sigma factors and their control
+115,3.4.2,Transcription factors and their control
+116,3.4.3,Trigger enzyme
+117,3.4.4,RNA binding regulators
+118,3.4.5,Regulators of core metabolism
+119,3.4.6,Transition state regulators
+120,3.4.7,phosphorelay
+121,3.4.8,Quorum sensing
+122,3.4.9,Other regulators
+123,3.5.1,Targets of c-di-AMP
+124,3.5.2,Targets of c-di-GMP
+125,3.5.3,Targets of (p)ppGpp
+126,3.5.4,Targets of ZTP
+127,3.5.5,Targets of AppppA
+128,4.1.1,Motility and chemotaxis
+129,4.1.2,Biofilm formation
+130,4.1.3,Genetic competence
+131,4.1.4,Swarming
+132,4.1.5,Sliding
+133,4.2.1,Sporulation proteins
+134,4.2.2,phosphorelay
+135,4.2.3,Sporulation/ other
+136,4.2.4,Germination
+137,4.2.5,Germination/ based on similarity
+138,4.3.1,General stress proteins (controlled by SigB)
+139,4.3.10,"Resistance against other toxic compounds (nitric oxide, phenolic acids, flavonoids, oxalate)"
+140,4.3.11,Resistance against toxic metals
+141,4.3.12,Resistance against toxic metals/ based on similarity
+142,4.3.13,Resistance against toxins/ antibiotics
+143,4.3.14,Resistance against toxins/ antibiotics/ based on similarity
+144,4.3.15,Biosynthesis of antibacterial compounds
+145,4.3.16,Biosynthesis of antibacterial compounds/ based on similarity
+146,4.3.17,"Toxins, antitoxins and immunity against toxins"
+147,4.3.18,"Toxins, antitoxins and immunity against toxins/ based on similarity"
+148,4.3.2,"Cell envelope stress proteins (controlled by SigM, V, W, X, Y)"
+149,4.3.3,Acid stress proteins (controlled by YvrI-YvrHa)
+150,4.3.4,Heat shock proteins
+151,4.3.5,Cold stress proteins
+152,4.3.6,Coping with hyper-osmotic stress
+153,4.3.7,Coping with hypo-osmotic stress
+154,4.3.8,Resistance against oxidative and electrophile stress
+155,4.3.9,Resistance against oxidative and electrophile stress/ based on similarity
+156,5.1.1,PBSX prophage
+157,5.1.2,SP-beta prophage
+158,5.1.3,Skin element
+159,5.1.4,Prophage 1
+160,5.1.5,Prophage 3
+161,5.1.6,Phage-related functions
+162,5.2.1,ICEBs1
+163,5.2.2,Additional genes
+164,6.14.1,Potential RNA/ Ribosome-binding proteins
+165,6.14.2,Potential role in the control of metabolism
+166,6.14.3,Potential regulatory elements
+167,6.14.4,Other highly expressed unknown proteins
+168,1.1.8.1,The Min system
+169,1.1.8.2,Other genes
+170,1.1.8.3,Divisome
+171,1.2.1.1,Importers
+172,1.2.1.2,Exporters
+173,1.2.1.3,Regulatory ABC transporters
+174,1.2.1.4,Unknown ABC transporters
+175,1.2.2.1,General PTS proteins
+176,1.2.2.2,Sugar specific PTS proteins
+177,1.2.3.1,The general components of the ECF transporters
+178,1.2.3.2,The substrate-specific S components of the ECF transporters
+179,1.2.3.3,Class I ECF transporter
+180,1.2.4.1,Amino acid transporters
+181,1.2.4.10,Siderophore exporters
+182,1.2.4.11,Other exporters
+183,1.2.4.12,Other transporters
+184,1.2.4.13,Metal ion exporters
+185,1.2.4.14,Multidrug exporters
+186,1.2.4.15,Multidrug exporters/ based on homology
+187,1.2.4.16,Amino acid exporters
+188,1.2.4.2,Peptide transporter
+189,1.2.4.3,Carbohydrate transporter
+190,1.2.4.4,Transporter for organic acids
+191,1.2.4.5,Metal ion transporter
+192,1.2.4.6,Nucleotide/ nucleoside transporter
+193,1.2.4.7,Transporter for cofactors
+194,1.2.4.8,Uptake of other small ions
+195,1.2.4.9,Uptake of compatible solutes
+196,1.3.1.1,Magnesium uptake/ efflux
+197,1.3.1.2,Sodium uptake/ export
+198,1.3.1.3,Potassium uptake/ export
+199,1.3.1.4,Metal ion homeostasis/ Other
+200,1.3.2.1,Copper
+201,1.3.2.2,Manganese
+202,1.3.2.3,Zinc
+203,1.3.2.4,Trace metals/ Other
+204,1.3.3.1,ABC transporters for the uptake of iron/ siderophores
+205,1.3.3.2,Elemental iron transport system
+206,1.3.3.3,Acquisition of iron / Other
+207,2.1.2.1,Terminal oxidases
+208,2.1.2.2,Anaerobic respiration
+209,2.1.2.3,Anaerobic respiration/based on similarity
+210,2.1.2.4,Respiration/ other
+211,2.1.5.1,ATPase
+212,2.1.5.2,Substrate-level phosphorylation
+213,2.2.1.1,Glycolysis
+214,2.2.1.2,Gluconeogenesis
+215,2.2.1.3,Pentose phosphate pathway
+216,2.2.1.4,TCA cycle
+217,2.2.1.5,Overflow metabolism
+218,2.2.2.1,Utilization of organic acids
+219,2.2.2.10,Utilization of mannitol
+220,2.2.2.11,Utilization of glucitol
+221,2.2.2.12,Utilization of rhamnose
+222,2.2.2.13,Utilization of gluconate
+223,2.2.2.14,Utilization of glucarate/galactarate
+224,2.2.2.15,Utilization of hexuronate
+225,2.2.2.16,Utilization of inositol
+226,2.2.2.17,Utilization of amino sugars
+227,2.2.2.18,Utilization of beta-glucosides
+228,2.2.2.19,Utilization of sucrose
+229,2.2.2.2,Utilization of acetoin
+230,2.2.2.20,Utilization of trehalose
+231,2.2.2.21,Utilization of melibiose
+232,2.2.2.22,Utilization of maltose
+233,2.2.2.23,Utilization of starch/ maltodextrin
+234,2.2.2.24,Utilization of galactan
+235,2.2.2.25,Utilization of glucomannan
+236,2.2.2.26,Utilization of pectin
+237,2.2.2.27,Utilization of other polymeric carbohydrates
+238,2.2.2.28,Utilization of other pentoses and hexoses
+239,2.2.2.3,Utilization of glycerol/ glycerol-3-phosphate
+240,2.2.2.4,Utilization of ribose
+241,2.2.2.5,Utilization of xylan/ xylose
+242,2.2.2.6,Utilization of arabinan/ arabinose/ arabitol
+243,2.2.2.7,Utilization of fructose
+244,2.2.2.8,Utilization of galactose
+245,2.2.2.9,Utilization of mannose
+246,2.3.1.1,Biosynthesis/ acquisition of glutamate/ glutamine/ ammonium assimilation
+247,2.3.1.10,Biosynthesis/ acquisition of methionine/ S-adenosylmethionine
+248,2.3.1.11,Biosynthesis/ acquisition of methionine/ S-adenosylmethionine/ based on similarity
+249,2.3.1.12,Biosynthesis/ acquisition of branched-chain amino acids
+250,2.3.1.13,Biosynthesis/ acquisition of aromatic amino acids
+251,2.3.1.14,Biosynthesis/ acquisition of histidine
+252,2.3.1.15,Biosynthesis/acquisition of L- and D-alanine
+253,2.3.1.2,Biosynthesis/ acquisition of proline
+254,2.3.1.3,Biosynthesis/ acquisition of proline/ based on similarity
+255,2.3.1.4,Biosynthesis/ acquisition of arginine
+256,2.3.1.5,Biosynthesis/ acquisition of aspartate/ asparagine
+257,2.3.1.6,Biosynthesis/ acquisition of lysine/ threonine
+258,2.3.1.7,Biosynthesis/ acquisition of lysine/ threonine/ based on similarity
+259,2.3.1.8,Biosynthesis/ acquisition of serine/ glycine/ alanine
+260,2.3.1.9,Biosynthesis/ acquisition of cysteine
+261,2.3.2.1,Utilization of glutamine/ glutamate
+262,2.3.2.10,Utilization of gamma-amino butyric acid
+263,2.3.2.2,Utilization of proline
+264,2.3.2.3,Utilization of proline/ based on similarity
+265,2.3.2.4,Utilization of arginine/ ornithine
+266,2.3.2.5,Utilization of histidine
+267,2.3.2.6,Utilization of  asparagine/ aspartate
+268,2.3.2.7,Utilization of alanine/ serine
+269,2.3.2.8,Utilization of threonine/ glycine
+270,2.3.2.9,Utilization of branched-chain amino acids
+271,2.3.3.1,Utilization of nitrate/ nitrite
+272,2.3.3.2,Utilization of urea
+273,2.3.3.3,Utilization of amino sugars
+274,2.3.3.4,Utilization of peptides
+275,2.3.3.5,Utilization of proteins
+276,2.4.1.1,Utilization of phospholipids
+277,2.4.1.2,Utilization of phospholipids/ based on similarity
+278,2.4.1.3,Utilization of fatty acids
+279,2.4.1.4,Utilization of lipids/ other
+280,2.4.2.1,Biosynthesis of fatty acids
+281,2.4.2.2,Biosynthesis of phospholipids
+282,2.4.2.3,Biosynthesis of isoprenoids
+283,2.5.2.1,Biosynthesis/ acquisition of purine nucleotides
+284,2.5.2.2,Biosynthesis/ acquisition of purine nucleotides/ based on similarity
+285,2.5.2.3,Purine salvage and interconversion
+286,2.5.2.4,Biosynthesis/ acquisition of pyrimidine nucleotides
+287,2.5.2.5,Biosynthesis/ acquisition of nucleotides/ other
+288,2.5.2.6,Biosynthesis/ acquisition of nucleotides/ other/ based on similarity
+289,2.6.1.1,Biosynthesis of peptidoglycan
+290,2.6.1.2,Biosynthesis of lipoteichoic acid
+291,2.6.1.3,Biosynthesis of teichoic acid
+292,2.6.1.4,Biosynthesis of teichuronic acid
+293,2.6.1.5,Biosynthesis of the carrier lipid undecaprenylphosphate
+294,2.6.2.1,Biosynthesis/ acquisition of biotin
+295,2.6.2.10,Biosynthesis of molybdopterin
+296,2.6.2.11,Biosynthesis of NAD(P)
+297,2.6.2.12,Biosynthesis of pyridoxal phosphate
+298,2.6.2.13,Biosynthesis/ acquisition of cobalamine (B12))
+299,2.6.2.2,Biosynthesis/ acquisition of riboflavin/ FAD
+300,2.6.2.3,Biosynthesis/ acquisition of thiamine
+301,2.6.2.4,Biosynthesis of coenzyme A
+302,2.6.2.5,Biosynthesis of folate
+303,2.6.2.6,Biosynthesis of heme/ siroheme
+304,2.6.2.7,Biosynthesis and scavenging of lipoic acid
+305,2.6.2.8,Biosynthesis of menaquinone
+306,2.6.2.9,Biosynthesis of menaquinone/ based on similarity
+307,2.6.4.1,Conversion of S-methyl cysteine to cysteine
+308,2.6.4.2,sulfur metabolism/ general
+309,2.6.4.3,Conversion of S-(2-succino)cysteine to cysteine
+310,2.6.5.1,Acquisition of iron / Other
+311,2.6.5.2,Acquisition of iron/ based on similarity
+312,2.6.5.3,Biosynthesis of iron-sulfur clusters
+313,2.6.5.4,ABC transporters for the uptake of iron/ siderophores
+314,2.6.5.5,Elemental iron transport system
+315,2.6.5.6,Iron export
+316,2.6.6.1,Biosynthesis of antibacterial compounds
+317,2.6.6.2,Biosynthesis of bacillithiol
+318,2.6.6.3,Biosynthesis of dipicolinate
+319,2.6.6.4,Biosynthesis of glycine betaine
+320,2.6.6.5,Biosynthesis of glycogen
+321,2.6.6.6,Metabolism of polyamines
+322,2.6.6.7,Biosynthesis of rhamnose (for the exosporium)
+323,2.6.6.8,Biosynthesis of legionaminic acid (for spore crust))
+324,3.1.5.1,Excision of prophages
+325,3.1.5.2,A/P endonucleases
+326,3.1.5.3,Spore-encoded non-homologous end joining system
+327,3.1.5.4,Double strand breaks repair
+328,3.1.5.5,Oxidized guanine (GO) DNA repair system
+329,3.1.5.6,Other proteins
+330,3.1.5.7,Mismatch repair (MMR)
+331,3.2.1.1,RNA polymerase
+332,3.2.1.2,Sigma factors
+333,3.2.1.3,Transcription elongation/ termination
+334,3.2.1.4,Prophage/ phage transcription
+335,3.2.4.1,Exoribonucleases
+336,3.2.4.2,Endoribonucleases
+337,3.2.4.3,RNA pyrophosphohydrolase
+338,3.2.4.4,RNases/ Other
+339,3.2.4.5,Effectors of RNA degradation
+340,3.3.1.1,Ribosomal RNA
+341,3.3.1.10,Aminoacyl-tRNA synthetases
+342,3.3.1.11,Translation factors
+343,3.3.1.12,Translation/ other
+344,3.3.1.13,Translation/ other/ based on similarity
+345,3.3.1.14,Translation factor modification and maturation
+346,3.3.1.15,Ribosome quality control and ribosome rescue
+347,3.3.1.2,rRNA modification and maturation
+348,3.3.1.3,rRNA modification and maturation/ based on similarity
+349,3.3.1.4,Ribosomal proteins
+350,3.3.1.5,Ribosomal protein/ based on similarity
+351,3.3.1.6,Ribosome assembly
+352,3.3.1.7,tRNA
+353,3.3.1.8,tRNA modification and maturation
+354,3.3.1.9,tRNA modification and maturation/ based on similarity
+355,3.3.4.1,Protein maturation
+356,3.3.4.2,Protein kinases
+357,3.3.4.4,Protein phosphatases
+358,3.3.4.5,Protein acetylases/ deacetylases
+359,3.3.4.6,Protein acetylase/ deacetylase/ based on similarity
+360,3.3.4.7,Protein deaminase
+361,3.3.4.8,Protein modification/ other
+362,3.3.7.1,Protein quality control
+363,3.3.7.2,Extracellular feeding proteases
+364,3.3.7.3,Proteolysis during sporulation/ germination
+365,3.3.7.4,Additional proteins involved in proteolysis
+366,3.4.1.1,Sigma factors
+367,3.4.1.2,Control of sigma factors
+368,3.4.2.1,Two-component system response regulators
+369,3.4.2.2,Control of two-component response regulators
+370,3.4.2.3,PRD-type regulators
+371,3.4.2.4,Control of PRD-type regulators
+372,3.4.2.5,Transcription factors/ other
+373,3.4.2.6,Transcription factor/ other/ based on similarity
+374,3.4.2.7,Control of transcription factor (other than two-component system)
+375,3.4.3.1,Trigger enzymes of the PTS that control the activity of PRD-containing transcription factors
+376,3.4.3.2,Trigger enzymes that control gene expression by protein-protein interaction with transcription factors
+377,3.4.3.3,Trigger enzymes that act directly as transcription factors by binding DNA
+378,3.4.3.4,Trigger enzyme that acts by binding of a specific RNA element
+379,3.4.3.5,Trigger enzymes that control transcription in a yet unknown way
+380,3.4.7.1,The kinases
+381,3.4.7.2,Proteins controlling the activity of the kinases
+382,3.4.7.3,The phosphotransferases
+383,3.4.7.4,The ultimate target
+384,3.4.7.5,Phosphatases controlling the phosphorelay
+385,3.4.7.6,Other protein controlling the activity of the phosphorelay
+386,4.1.1.1,Signal transduction in motility and chemotaxis
+387,4.1.1.2,Flagellar proteins
+388,4.1.1.3,Flagellar proteins/ based on similarity
+389,4.1.1.4,Motility and chemotaxis/ other
+390,4.1.2.1,Matrix polysaccharide synthesis
+391,4.1.2.2,"Amyloid protein synthesis, secretion and assembly"
+392,4.1.2.3,Repellent surface layer
+393,4.1.2.4,Regulation
+394,4.1.2.5,Other proteins required for biofilm formation
+395,4.1.2.6,Other proteins required for efficient pellicle biofilm formation
+396,4.2.1.1,Spore coat proteins
+397,4.2.1.2,Spore coat protein/ based on similarity
+398,4.2.1.3,Small acid-soluble spore proteins
+399,4.2.1.4,Sporulation proteins/ other
+400,4.2.1.5,Newly identified sporulation proteins (based on transcription profiling)
+401,4.2.2.1,The kinases
+402,4.2.2.2,Proteins controlling the activity of the kinases
+403,4.2.2.3,The phosphotransferases
+404,4.2.2.4,The ultimate target
+405,4.2.2.5,Phosphatases controlling the phosphorelay
+406,4.2.2.6,Other protein controlling the activity of the phosphorelay
+407,4.2.4.1,Germinant receptors
+408,4.2.4.2,Additional germination proteins
+409,4.3.17.1,Type 1 TA systems
+410,4.3.17.2,Type 2 TA systems
+411,4.3.17.3,"Toxins, antitoxins and immunity/ Additional genes"
+412,1.2.1.1.1,Uptake of carbon sources
+413,1.2.1.1.2,Uptake of amino acids
+414,1.2.1.1.3,Uptake of peptides
+415,1.2.1.1.4,Uptake of compatible solutes for osmoprotection
+416,1.2.1.1.5,Uptake of iron/ siderophores
+417,1.2.1.1.6,Uptake of ions
+418,1.2.1.1.7,Uptake of cofactors
+419,1.2.1.2.1,Efflux of antibiotics
+420,1.2.1.2.2,Export of antibiotic substances
+421,1.2.1.2.3,Export of peptides
+422,1.2.1.2.4,Export of cell wall components
+423,1.2.1.2.5,Export of ions
+424,1.2.1.2.6,Exporters of unknown function
+425,1.2.4.1.1,Solute:sodium symporter family
+426,1.2.4.1.3,Alanine or glycine cation symporter family
+427,1.2.4.1.4,APC superfamily
+428,1.2.4.1.5,BCAA transporters
+429,1.2.4.1.6,Dicarboxylate/amino acid:cation symporter
+430,1.2.4.1.7,Sodium-solute symporter
+431,1.2.4.1.8,Additional amino acid transporters
+432,3.4.2.2.1,Two-component sensor kinase
+433,3.4.2.2.2,Response regulator aspartate phosphatase
+434,3.4.2.2.3,Control of response regulators/ other
+435,4.1.1.1.1,Soluble signalling proteins
+436,4.1.1.1.2,Coupling proteins
+437,4.1.1.1.3,Soluble chemoreceptors
+438,4.1.1.1.4,Membrane-bound chemoreceptors
+439,4.1.1.1.5,Additional chemotaxis signal transduction and regulatory proteins
+440,4.2.1.1.1,Class I
+441,4.2.1.1.2,Class II
+442,4.2.1.1.3,Class III
+443,4.2.1.1.4,Class IV
+444,4.2.1.1.5,Class V
+445,4.2.1.1.7,Class VI
+446,4.2.1.1.8,Not yet assigned
+447,6.4,Phosphoproteins
+448,6.5,Universally conserved proteins
+449,6.6,Poorly characterized/ putative enzymes
+450,6.7,Proteins of unknown function
+451,6.8,Short peptides
+452,6.9,NcRNA
+453,6.4.1,Phosphorylation on an Arg residue
+454,6.4.2,Phosphorylation on an Asp residue
+455,6.4.3,Phosphorylation on a Cys residue
+456,6.4.4,Phosphorylation on a His residue
+457,6.4.5,Phosphorylation on a Ser residue
+458,6.4.6,Phosphorylation on a Thr residue
+459,6.4.7,Phosphorylation on a Tyr residue
+460,6.4.8,"Phosphorylation on either a Ser, Thr or Tyr residue"
+461,6.4.9,Phosphoproteins / Other
+462,6.9.1,6S RNA
+463,6.9.2,tmRNA
+464,6.9.3,Small cytoplasmatic RNA
+465,6.9.4,RNA component of RNase P
+466,6.9.5,Regulatory RNAs
+467,6.9.6,Antisense RNAs of toxin/antitoxin systems
+468,6.9.7,Small RNAs with unknown functions
